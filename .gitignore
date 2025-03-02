@@ -1,0 +1,48 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribusi / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# File untuk PyInstaller
+*.manifest
+*.spec
+
+# Virtual environment directories
+venv/
+env/
+
+# File environment yang berisi konfigurasi rahasia
+.env
+
+# File log
+*.log
+
+# IDE / Editor
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Sistem Operasi
+.DS_Store
+Thumbs.db
+
+# File sementara
+*.tmp
