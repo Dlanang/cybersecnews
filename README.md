@@ -9,7 +9,7 @@ Proyek ini melakukan scraping berita dari Reddit dan The Hacker News, kemudian m
 
 ## 1. Struktur Proyek
 
-![Project Structure](https://via.placeholder.com/600x400?text=Project+Structure)
+![Project Structure]
 
 - **.env:** File konfigurasi environment.
 - **main.py:** Entry point aplikasi.
