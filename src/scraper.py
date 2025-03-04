@@ -11,7 +11,7 @@ import json
 from datetime import datetime
 from logging_config import logger
 import cloudscraper  
-import cfscrape  
+# Fallback ke cfscrape dihapus karena masalah DEFAULT_CIPHERS
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -32,7 +32,6 @@ def get_severity(cvss):
         logger.error(f"Error converting CVSS score: {e}")
         return "empty"
 
-# BaseScraper dengan fallback ke cloudscraper dan cfscrape
 class BaseScraper(ABC):
     def __init__(self, url):
         self.url = url
@@ -92,22 +91,14 @@ class BaseScraper(ABC):
                     logger.info(f"Data berhasil diambil dengan cloudscraper dari {self.url}")
                     return response.text
                 else:
-                    logger.info(f"Cloudscraper returned status {response.status_code}. Fallback ke cfscrape...")
-                    scraper_cfs = cfscrape.create_scraper()
-                    time.sleep(random.uniform(1,2))
-                    response = scraper_cfs.get(self.url, timeout=10, proxies=self._get_proxies())
-                    if response.status_code == 200:
-                        logger.info(f"Data berhasil diambil dengan cfscrape dari {self.url}")
-                        return response.text
-                    else:
-                        error_detail = {
-                            "error": f"Gagal mengambil data dari {self.url}",
-                            "status_code": response.status_code,
-                            "fallback": "cfscrape",
-                            "response": response.text[:200]
-                        }
-                        logger.error(json.dumps(error_detail))
-                        return json.dumps(error_detail)
+                    error_detail = {
+                        "error": f"Gagal mengambil data dari {self.url}",
+                        "status_code": response.status_code,
+                        "fallback": "cloudscraper",
+                        "response": response.text[:200]
+                    }
+                    logger.error(json.dumps(error_detail))
+                    return json.dumps(error_detail)
         except Exception as e:
             error_detail = {"error": str(e), "url": self.url}
             logger.error(json.dumps(error_detail))
@@ -134,12 +125,10 @@ class BaseScraper(ABC):
         else:
             return None
 
-# HackerNewsScraper: Mengambil artikel dari The Hacker News dengan informasi penulis
 class HackerNewsScraper(BaseScraper):
     def parse(self, html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
         articles = []
-        # Coba ambil data JSON-LD jika tersedia
         scripts = soup.find_all('script', type="application/ld+json")
         for script in scripts:
             try:
@@ -167,8 +156,6 @@ class HackerNewsScraper(BaseScraper):
             except Exception as e:
                 logger.error(f"Error parsing JSON-LD in HackerNewsScraper: {e}")
                 continue
-
-        # Fallback: Parsing HTML konvensional
         for article in soup.find_all('div', class_='body-post'):
             title_elem = article.find('h2', class_='home-title')
             if title_elem:
@@ -190,7 +177,6 @@ class HackerNewsScraper(BaseScraper):
                 })
         return articles
 
-# OpenCVEScraper: Mengambil data dari API OpenCVE dan menyaring berdasarkan tingkat CVSS (opsional)
 class OpenCVEScraper:
     BASE_URL = "https://app.opencve.io/api/cve"
     def __init__(self):
@@ -198,54 +184,61 @@ class OpenCVEScraper:
         load_dotenv()
         self.auth = (os.getenv("OPEN_CVE_USERNAME"), os.getenv("OPEN_CVE_PASSWORD"))
         self.headers = {"Accept": "application/json"}
-        # Ambil variabel CVSS_LEVEL dan pisahkan jika ada koma
-        cvss_level = os.getenv("CVSS_LEVEL", "").lower()
-        if cvss_level:
-            self.cvss_levels = [level.strip() for level in cvss_level.split(",")]
-        else:
-            self.cvss_levels = []
-    
+        # Tidak menerapkan filter CVSS sekarang (semua data diambil)
+        self.cvss_levels = []  # Kosong: tidak filter
+     
     def fetch(self):
-        url = self.BASE_URL
-        try:
-            response = requests.get(url, headers=self.headers, auth=self.auth, timeout=10)
-            response.raise_for_status()
-            logger.info(f"Berhasil mengambil data CVE dari {url}")
-            return response.json()
-        except Exception as e:
-            logger.error(f"Error mengambil data dari OpenCVE API: {e}")
-            return None
+        combined = []
+        # Ambil data dari 10 halaman pertama
+        for page in range(1, 11):
+            url = f"{self.BASE_URL}?page={page}"
+            try:
+                response = requests.get(url, headers=self.headers, auth=self.auth, timeout=10)
+                response.raise_for_status()
+                data = response.json()
+                results = data.get("results", [])
+                combined.extend(results)
+                logger.info(f"Halaman {page}: {len(results)} hasil")
+            except Exception as e:
+                logger.error(f"Error fetching page {page} dari OpenCVE API: {e}")
+        logger.info(f"Total vulnerability dari 10 halaman: {len(combined)}")
+        return combined
 
-    def parse(self, data):
-        if not data:
+    def parse(self, vulnerabilities):
+        if not vulnerabilities:
             return []
         parsed_cves = []
-        for cve in data:
-            cve_id = cve.get("id")
-            description = cve.get("summary", "Deskripsi tidak tersedia.")
-            cvss = cve.get("cvss", None)
-            if cvss is None or cvss == "N/A":
+        for vuln in vulnerabilities:
+            if not isinstance(vuln, dict):
                 continue
-            severity = get_severity(cvss)
-            # Jika filter sudah diatur, periksa apakah severity masuk dalam daftar yang diizinkan
-            if self.cvss_levels and severity not in self.cvss_levels:
+            cve_id = vuln.get("cve_id")
+            description = vuln.get("description", "Deskripsi tidak tersedia.")
+            cvss = vuln.get("cvss", None)
+            updated_at = vuln.get("updated_at")
+            if not cve_id or cvss is None or cvss == "N/A" or not updated_at:
                 continue
-            link = f"https://nvd.nist.gov/vuln/detail/{cve_id}"
+            # Tidak menerapkan filter severity, ambil semua
             parsed_cves.append({
                 "title": cve_id,
-                "link": link,
+                "link": f"https://nvd.nist.gov/vuln/detail/{cve_id}",
                 "image": None,
-                "snippet": description if len(description) <= 150 else description[:150] + "...",
-                "cve": [cve_id],
+                "description": description,
                 "cvss": cvss,
+                "updated_at": updated_at,
                 "author": "OpenCVE"
             })
-        return parsed_cves
+        # Sort berdasarkan updated_at descending
+        parsed_cves.sort(key=lambda x: datetime.fromisoformat(x["updated_at"].replace("Z", "+00:00")), reverse=True)
+        # Pilih 20 vulnerability terbaru
+        selected = parsed_cves[:20]
+        for vuln in selected:
+            desc = vuln["description"]
+            vuln["snippet"] = desc if len(desc) <= 150 else desc[:150] + "..."
+        return selected
 
     def scrape(self):
         raw_data = self.fetch()
         return self.parse(raw_data)
-
 
 class ScraperFactory:
     @staticmethod

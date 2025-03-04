@@ -13,30 +13,36 @@ SIGNATURE = "Made with ❤️ from N47AN+P37ER"
 MAX_ARTICLES = 60
 DELAY_BETWEEN_EMBEDS = 2
 
-def is_article_already_sent(article_id, data_storage):
-    return article_id in data_storage
-
-def update_json_storage(articles):
-    data_file = "scraped_data.json"
-    if os.path.exists(data_file):
-        with open(data_file, "r") as f:
-            data_storage = json.load(f)
-    else:
-        data_storage = {}
+def update_json_storage(articles, filename):
+    """
+    Simpan seluruh artikel ke file JSON untuk monitoring.
+    Duplicate check diabaikan sehingga setiap run, artikel yang didapatkan
+    (misalnya 20 vulnerability teratas) akan selalu dikirim.
+    """
+    # Pastikan file JSON ada; jika tidak, buat dengan {} sebagai isinya.
+    if not os.path.exists(filename):
+        with open(filename, "w") as f:
+            json.dump({}, f)
     
-    new_articles = [article for article in articles if not is_article_already_sent(article["title"], data_storage)]
+    with open(filename, "r") as f:
+        data_storage = json.load(f)
+    
+    # Selalu gunakan seluruh data (tidak melakukan duplicate filtering)
+    new_articles = articles
+    
+    # Update data_storage dengan data baru (overwrite jika sudah ada)
     for article in new_articles:
         data_storage[article["title"]] = {
-            "description": article["snippet"],
+            "description": article.get("snippet", ""),
             "cvss": article.get("cvss", ""),
-            "link": article["link"],
+            "link": article.get("link", ""),
             "author": article.get("author", "Unknown"),
-            "date": datetime.now().isoformat()
+            "date": article.get("updated_at", datetime.now().isoformat())
         }
     
-    with open(data_file, "w") as f:
+    with open(filename, "w") as f:
         json.dump(data_storage, f, indent=2)
-    logger.info(f"{len(new_articles)} artikel baru ditambahkan.")
+    logger.info(f"{len(new_articles)} artikel diperbarui ke {filename}.")
     return new_articles
 
 def create_embed_cve(cve):
@@ -74,10 +80,9 @@ def process_and_send(scraper_key, embed_title, source_type):
         logger.info(f"Tidak ada data baru untuk {embed_title}.")
         return
     
-    new_articles = update_json_storage(articles[:MAX_ARTICLES])
-    if not new_articles:
-        logger.info(f"Semua artikel untuk {embed_title} sudah pernah dikirim.")
-        return
+    filename = "cve.json" if source_type == "cve" else "scraped_data.json"
+    # Tidak melakukan duplicate filtering; kirim apa saja data yang didapat.
+    new_articles = update_json_storage(articles[:MAX_ARTICLES], filename=filename)
     
     for i, article in enumerate(new_articles, start=1):
         if source_type == "cve":
@@ -89,11 +94,8 @@ def process_and_send(scraper_key, embed_title, source_type):
         time.sleep(DELAY_BETWEEN_EMBEDS)
 
 def main():
-    # Data CVE dari OpenCVE
     process_and_send("opencve", "Berita CVE & CVSS Terbaru dari OpenCVE", source_type="cve")
-    # Artikel dari HackerNews Vulnerability
     process_and_send("hackernews_vulnerability", "Artikel Vulnerability dari The Hacker News", source_type="hn")
-    # Artikel dari HackerNews Cyber Attack
     process_and_send("hackernews_attack", "Artikel Cyber Attack dari The Hacker News", source_type="hn")
 
 if __name__ == "__main__":

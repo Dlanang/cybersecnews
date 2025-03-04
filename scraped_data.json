@@ -1,0 +1,233 @@
+{
+  "Google's March 2025 Android Security Update Fixes Two Actively Exploited Vulnerabilities": {
+    "description": "Google has released  its monthly Android Security Bulletin for March 2025 to address a total of 44 vulnerabilities, including two that it said have co...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/03/googles-march-2025-android-security.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638317"
+  },
+  "Hackers Exploit Paragon Partition Manager Driver Vulnerability in Ransomware Attacks": {
+    "description": "Threat actors have been exploiting a security vulnerability in Paragon Partition Manager's BioNTdrv.sys driver in ransomware attacks to escalate privi...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/03/hackers-exploit-paragon-partition.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638343"
+  },
+  "Becoming Ransomware Ready: Why Continuous Validation Is Your Best Defense": {
+    "description": "Ransomware doesn't hit all at once\u2014it slowly floods your defenses in stages. Like a ship subsumed with water, the attack starts quietly, below the sur...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/becoming-ransomware-ready-why.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632035"
+  },
+  "The New Ransomware Groups Shaking Up 2025": {
+    "description": "In 2024, global ransomware attacks hit 5,414, an 11% increase from 2023.\u00a0   After a slow start, attacks spiked in Q2 and surged in Q4, with 1,827 inci...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/03/the-new-ransomware-groups-shaking-up.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638353"
+  },
+  "PolarEdge Botnet Exploits Cisco and Other Flaws to Hijack ASUS, QNAP, and Synology Devices": {
+    "description": "A new malware campaign has been observed targeting edge devices from Cisco, ASUS, QNAP, and Synology to rope them into a botnet named PolarEdge since ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/polaredge-botnet-exploits-cisco-and.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638363"
+  },
+  "Hackers Exploited Krpano Framework Flaw to Inject Spam Ads on 350+ Websites": {
+    "description": "A cross-site scripting (XSS) vulnerability in a virtual tour framework has been weaponized by malicious actors to inject malicious scripts across hund...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/hackers-exploited-krpano-framework-flaw.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638409"
+  },
+  "CERT-UA Warns of UAC-0173 Attacks Deploying DCRat to Compromise Ukrainian Notaries": {
+    "description": "The Computer Emergency Response Team of Ukraine (CERT-UA) on Tuesday warned of renewed activity from an organized criminal group it tracks as UAC-0173...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/cert-ua-warns-of-uac-0173-attacks.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638432"
+  },
+  "CISA Adds Microsoft and Zimbra Flaws to KEV Catalog Amid Active Exploitation": {
+    "description": "The U.S. Cybersecurity and Infrastructure Security Agency (CISA) on Tuesday placed  two security flaws impacting Microsoft Partner Center and Synacor ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/cisa-adds-microsoft-and-zimbra-flaws-to.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638443"
+  },
+  "2,500+ Truesight.sys Driver Variants Exploited to Bypass EDR and Deploy HiddenGh0st RAT": {
+    "description": "A large-scale malware campaign has been found leveraging a vulnerable Windows driver associated with Adlice's product suite to sidestep detection effo...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/2500-truesightsys-driver-variants.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638453"
+  },
+  "Two Actively Exploited Security Flaws in Adobe and Oracle Products Flagged by CISA": {
+    "description": "The U.S. Cybersecurity and Infrastructure Security Agency (CISA) has added  two security flaws impacting Adobe ColdFusion and Oracle Agile Product Lif...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/two-actively-exploited-security-flaws.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638462"
+  },
+  "New Malware Campaign Uses Cracked Software to Spread Lumma and ACR Stealer": {
+    "description": "Cybersecurity researchers are warning of a new campaign that leverages cracked versions of software as a lure to distribute information stealers like ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/new-malware-campaign-uses-cracked.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638471"
+  },
+  "Cisco Confirms Salt Typhoon Exploited CVE-2018-0171 to Target U.S. Telecom Networks": {
+    "description": "Cisco has confirmed that a Chinese threat actor known as Salt Typhoon gained access by likely abusing a known security flaw tracked as CVE-2018-0171 ,...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/cisco-confirms-salt-typhoon-exploited.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638481"
+  },
+  "CISA Flags Craft CMS Vulnerability CVE-2025-23209 Amid Active Attacks": {
+    "description": "A high-severity security flaw impacting the Craft content management system (CMS) has been added  by the U.S. Cybersecurity and Infrastructure Securit...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/cisa-flags-craft-cms-vulnerability-cve.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638489"
+  },
+  "China-Linked Attackers Exploit Check Point Flaw to Deploy ShadowPad and Ransomware": {
+    "description": "A previously unknown threat activity cluster targeted European organizations, particularly those in the healthcare sector, to deploy PlugX and its suc...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/chinese-linked-attackers-exploit-check.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638498"
+  },
+  "Citrix Releases Security Fix for NetScaler Console Privilege Escalation Vulnerability": {
+    "description": "Citrix has released security updates for a high-severity security flaw impacting NetScaler Console (formerly NetScaler ADM) and NetScaler Agent that c...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/citrix-releases-security-fix-for.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638507"
+  },
+  "Microsoft Patches Actively Exploited Power Pages Privilege Escalation Vulnerability": {
+    "description": "Microsoft has released security updates to address two Critical-rated flaws impacting Bing and Power Pages, including one that has come under active e...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/microsoft-patches-actively-exploited.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638516"
+  },
+  "CISA Adds Palo Alto Networks and SonicWall Flaws to Exploited Vulnerabilities List": {
+    "description": "The U.S. Cybersecurity and Infrastructure Security Agency (CISA) on Tuesday added  two security flaws impacting Palo Alto Networks PAN-OS and SonicWal...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/cisa-adds-palo-alto-networks-and.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638525"
+  },
+  "New OpenSSH Flaws Enable Man-in-the-Middle and DoS Attacks \u2014 Patch Now": {
+    "description": "Two security vulnerabilities have been discovered in the OpenSSH secure networking utility suite that, if successfully exploited, could result in an a...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/new-openssh-flaws-enable-man-in-middle.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638535"
+  },
+  "Juniper Session Smart Routers Vulnerability Could Let Attackers Bypass Authentication": {
+    "description": "Juniper Networks has released security updates to address a critical security flaw impacting Session Smart Router, Session Smart Conductor, and WAN As...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/juniper-session-smart-routers.html",
+    "author": "Unknown",
+    "date": "2025-03-04T12:42:47.113668"
+  },
+  "Belarus-Linked Ghostwriter Uses Macropack-Obfuscated Excel Macros to Deploy Malware": {
+    "description": "Opposition activists in Belarus as well as Ukrainian military and government organizations are the target of a new campaign that employs malware-laced...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/belarus-linked-ghostwriter-uses.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.631967"
+  },
+  "New Golang-Based Backdoor Uses Telegram Bot API for Evasive C2 Operations": {
+    "description": "Cybersecurity researchers have shed light on a new Golang-based backdoor that uses Telegram as a mechanism for command-and-control (C2) communications...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/new-golang-based-backdoor-uses-telegram.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632016"
+  },
+  "Microsoft: Russian-Linked Hackers Using 'Device Code Phishing' to Hijack Accounts": {
+    "description": "Microsoft is calling attention to an emerging threat cluster it calls Storm-2372  that has been attributed to a new set of cyber attacks aimed at a va...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/microsoft-russian-linked-hackers-using.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632053"
+  },
+  "Gcore DDoS Radar Reveals 56% YoY Increase in DDoS Attacks": {
+    "description": "Gcore's latest DDoS Radar report  analyzes attack data from Q3\u2013Q4 2024, revealing a 56% YoY rise in the total number of DDoS attacks with the largest ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/gcore-ddos-radar-reveals-56-yoy.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632072"
+  },
+  "Threat Actors Exploit ClickFix to Deploy NetSupport RAT in Latest Cyber Attacks": {
+    "description": "Threat actors have observed the increasingly common ClickFix technique  to deliver a remote access trojan named NetSupport RAT  since early January 20...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/threat-actors-exploit-clickfix-to.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632088"
+  },
+  "Fake Google Chrome Sites Distribute ValleyRAT Malware via DLL Hijacking": {
+    "description": "Bogus websites advertising Google Chrome have been used to distribute malicious installers for a remote access trojan called ValleyRAT.  The malware, ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/02/fake-google-chrome-sites-distribute.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632106"
+  },
+  "E.U. Sanctions 3 Russian Nationals for Cyber Attacks Targeting Estonia's Key Ministries": {
+    "description": "The Council of the European Union has sanctioned three individuals for allegedly carrying out \"malicious cyber activities\" against Estonia.  The three...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/eu-sanctions-3-russian-nationals-for.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632124"
+  },
+  "Trump Terminates DHS Advisory Committee Memberships, Disrupting Cybersecurity Review": {
+    "description": "The new Trump administration has terminated all memberships of advisory committees that report to the Department of Homeland Security (DHS).\u00a0  \"In ali...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/trump-terminates-dhs-advisory-committee.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632141"
+  },
+  "PNGPlug Loader Delivers ValleyRAT Malware Through Fake Software Installers": {
+    "description": "Cybersecurity researchers are calling attention to a series of cyber attacks that have targeted Chinese-speaking regions like Hong Kong, Taiwan, and M...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/pngplug-loader-delivers-valleyrat.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632159"
+  },
+  "DoNot Team Linked to New Tanzeem Android Malware Targeting Intelligence Collection": {
+    "description": "The Threat actor known as DoNot Team  has been linked to a new Android malware as part of highly targeted cyber attacks.  The artifacts  in question, ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/donot-team-linked-to-new-tanzeem.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632176"
+  },
+  "U.S. Sanctions Chinese Cybersecurity Firm Over Treasury Hack Tied to Salt Typhoon": {
+    "description": "The U.S. Treasury Department's Office of Foreign Assets Control (OFAC) has imposed sanctions against a Chinese cybersecurity company and a Shanghai-ba...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/us-sanctions-chinese-cybersecurity-firm.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632193"
+  },
+  "RedDelta Deploys PlugX Malware to Target Mongolia and Taiwan in Espionage Campaigns": {
+    "description": "Mongolia, Taiwan, Myanmar, Vietnam, and Cambodia have been targeted by the China-nexus RedDelta threat actor to deliver a customized version of the Pl...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/reddelta-deploys-plugx-malware-to.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632211"
+  },
+  "Top 5 Malware Threats to Prepare Against in 2025": {
+    "description": "2024 had its fair share of high-profile cyber attacks, with companies as big as Dell and TicketMaster falling victim to data breaches and other infras...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/01/top-5-malware-threats-to-prepare.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:54.632230"
+  },
+  "Cisco, Hitachi, Microsoft, and Progress Flaws Actively Exploited\u2014CISA Sounds Alarm": {
+    "description": "The U.S. Cybersecurity and Infrastructure Security Agency (CISA) on Monday added  five security flaws impacting software from Cisco, Hitachi Vantara, ...",
+    "cvss": "",
+    "link": "https://thehackernews.com/2025/03/cisco-hitachi-microsoft-and-progress.html",
+    "author": "Unknown",
+    "date": "2025-03-04T19:38:01.638268"
+  }
+}
