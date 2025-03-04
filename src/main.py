@@ -3,12 +3,11 @@ import json
 import time
 from datetime import datetime
 from dotenv import load_dotenv
-from scraper import ScraperFactory, OpenCVEScraper
+from scraper import ScraperFactory
 from discord_webhook import send_embed
 from logging_config import logger
 
 load_dotenv()
-CUSTOM_IMAGE_URL = os.getenv("CUSTOM_IMAGE_URL")
 
 SIGNATURE = "Made with ❤️ from N47AN+P37ER"
 MAX_ARTICLES = 60
@@ -90,8 +89,11 @@ def process_and_send(scraper_key, embed_title, source_type):
         time.sleep(DELAY_BETWEEN_EMBEDS)
 
 def main():
+    # Data CVE dari OpenCVE
     process_and_send("opencve", "Berita CVE & CVSS Terbaru dari OpenCVE", source_type="cve")
+    # Artikel dari HackerNews Vulnerability
     process_and_send("hackernews_vulnerability", "Artikel Vulnerability dari The Hacker News", source_type="hn")
+    # Artikel dari HackerNews Cyber Attack
     process_and_send("hackernews_attack", "Artikel Cyber Attack dari The Hacker News", source_type="hn")
 
 if __name__ == "__main__":

@@ -1,7 +1,6 @@
 import os
 import time
 import random
-import logging
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -17,6 +16,23 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+def get_severity(cvss):
+    """Mengembalikan tingkat severity berdasarkan nilai CVSS (CVSS3.1)."""
+    try:
+        score = float(cvss)
+        if score < 4.0:
+            return "low"
+        elif score < 7.0:
+            return "medium"
+        elif score < 9.0:
+            return "high"
+        else:
+            return "critical"
+    except Exception as e:
+        logger.error(f"Error converting CVSS score: {e}")
+        return "empty"
+
+# BaseScraper dengan fallback ke cloudscraper dan cfscrape
 class BaseScraper(ABC):
     def __init__(self, url):
         self.url = url
@@ -118,11 +134,12 @@ class BaseScraper(ABC):
         else:
             return None
 
+# HackerNewsScraper: Mengambil artikel dari The Hacker News dengan informasi penulis
 class HackerNewsScraper(BaseScraper):
     def parse(self, html_content):
         soup = BeautifulSoup(html_content, 'html.parser')
         articles = []
-        # Mencoba ambil data JSON-LD terlebih dahulu
+        # Coba ambil data JSON-LD jika tersedia
         scripts = soup.find_all('script', type="application/ld+json")
         for script in scripts:
             try:
@@ -137,7 +154,6 @@ class HackerNewsScraper(BaseScraper):
                         title = item.get("headline") or item.get("name")
                         snippet = item.get("description", "")
                         link = item.get("url")
-                        # Ambil penulis jika ada
                         author = item.get("author", {}).get("name", "Unknown")
                         articles.append({
                             "title": title,
@@ -174,17 +190,23 @@ class HackerNewsScraper(BaseScraper):
                 })
         return articles
 
+# OpenCVEScraper: Mengambil data dari API OpenCVE dan menyaring berdasarkan tingkat CVSS (opsional)
 class OpenCVEScraper:
     BASE_URL = "https://app.opencve.io/api/cve"
-    def __init__(self, vendor="microsoft"):
+    def __init__(self):
         from dotenv import load_dotenv
         load_dotenv()
-        self.vendor = vendor
         self.auth = (os.getenv("OPEN_CVE_USERNAME"), os.getenv("OPEN_CVE_PASSWORD"))
         self.headers = {"Accept": "application/json"}
+        # Ambil variabel CVSS_LEVEL dan pisahkan jika ada koma
+        cvss_level = os.getenv("CVSS_LEVEL", "").lower()
+        if cvss_level:
+            self.cvss_levels = [level.strip() for level in cvss_level.split(",")]
+        else:
+            self.cvss_levels = []
     
     def fetch(self):
-        url = f"{self.BASE_URL}?vendor={self.vendor}"
+        url = self.BASE_URL
         try:
             response = requests.get(url, headers=self.headers, auth=self.auth, timeout=10)
             response.raise_for_status()
@@ -201,7 +223,13 @@ class OpenCVEScraper:
         for cve in data:
             cve_id = cve.get("id")
             description = cve.get("summary", "Deskripsi tidak tersedia.")
-            cvss = cve.get("cvss", "N/A")
+            cvss = cve.get("cvss", None)
+            if cvss is None or cvss == "N/A":
+                continue
+            severity = get_severity(cvss)
+            # Jika filter sudah diatur, periksa apakah severity masuk dalam daftar yang diizinkan
+            if self.cvss_levels and severity not in self.cvss_levels:
+                continue
             link = f"https://nvd.nist.gov/vuln/detail/{cve_id}"
             parsed_cves.append({
                 "title": cve_id,
@@ -218,6 +246,7 @@ class OpenCVEScraper:
         raw_data = self.fetch()
         return self.parse(raw_data)
 
+
 class ScraperFactory:
     @staticmethod
     def get_scraper(site):
@@ -226,6 +255,6 @@ class ScraperFactory:
         elif site == 'hackernews_attack':
             return HackerNewsScraper("https://thehackernews.com/search/label/Cyber%20Attack")
         elif site == 'opencve':
-            return OpenCVEScraper(vendor="microsoft")
+            return OpenCVEScraper()
         else:
             raise ValueError("Unsupported site for scraping")
